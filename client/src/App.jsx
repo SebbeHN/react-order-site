@@ -11,6 +11,11 @@ export default function App() {
     setCart([...cart, name])
   }
 
+  function removeFromCart(name) {
+    const index = cart.indexOf(name)
+    const newCart = cart.filter((item, index) => index != cart.indexOf(name))
+    setCart(newCart)
+  }
   return <>
     <h1>PTC Seller</h1>
     <div id="homepage">
@@ -21,6 +26,7 @@ export default function App() {
               key={card.name + "-" + index}
               card={card}
               addToCart={addToCart}
+              removeFromCart={removeFromCart}
             />
           )
         }
