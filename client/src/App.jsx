@@ -8,14 +8,36 @@ export default function App() {
   const [cart, setCart] = useState([])
 
   function addToCart(name) {
-    setCart([...cart, name])
+    const itemIndex = cart.findIndex(item => item.name === name);
+    if (itemIndex === -1) {
+      setCart([...cart, { name, amount: 1 }]);
+    } else {
+      const tempCart = [...cart];
+      tempCart[itemIndex].amount += 1;
+      setCart(tempCart);
+    }
   }
 
   function removeFromCart(name) {
-    const index = cart.indexOf(name)
-    const newCart = cart.filter((item, index) => index != cart.indexOf(name))
-    setCart(newCart)
+    const itemIndex = cart.findIndex(item => item.name === name);
+    
+    if (itemIndex === -1) {
+      alert(name + " is not in cart");
+      return;
+    }
+  
+    const tempCart = [...cart];
+    
+    if (tempCart[itemIndex].amount > 1) {
+      tempCart[itemIndex].amount -= 1;
+    } else {
+      tempCart.splice(itemIndex, 1);
+    }
+  
+    setCart(tempCart);
   }
+  
+  
   return <>
     <h1>PTC Seller</h1>
     <div id="homepage">
@@ -50,7 +72,7 @@ export default function App() {
             <p>Cart is empty</p>
             :
             cart.map(
-              (item, index) => <p key={item + "-" + index}>{item}</p>
+              (item, index) => <p key={item + "-" + index}>{item.name}, {item.amount}</p>
             )
         }
       </section>
