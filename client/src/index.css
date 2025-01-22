@@ -1,0 +1,19 @@
+#homepage {
+  display: flex;
+  justify-content: space-between;
+}
+
+#cardList {
+  width: 85%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#cart {
+  background-color: black;
+  color: ghostwhite;
+  width: 15%;
+  height: 90vh;
+  position: sticky;
+  top: 5vh; 
+}
